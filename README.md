@@ -33,3 +33,7 @@ git remote add office #{office_repository}
 railsを参考にappにした。  
 DDDでいうとドメイン層を意識してます。  
 
+## exe example
+```bash
+./exe/yosenabe.rb yamada
+```

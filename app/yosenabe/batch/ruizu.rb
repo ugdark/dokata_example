@@ -13,9 +13,13 @@ module Yosenabe
       def say
         logger.info('test')
       end
+
+      def hello(name)
+        puts "hello. #{name}"
+      end
     end
   end
 end
 
 
-Yosenabe::Batch::Ruizu.new.say
+#Yosenabe::Batch::Ruizu.new.say

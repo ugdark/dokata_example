@@ -7,6 +7,8 @@ gemspec
 
 gem 'dokata', '0.1.0', :path => 'modules/dokata'
 
+gem 'thor', '~> 0.20.0'
+
 gem 'rake', '~> 12.0.0', :group => [:development, :test, :local]
 gem 'yard', '~> 0.9.9', :group => [:development, :test, :local]
 gem 'test-unit', '~> 3.2.5', :group => [:development, :test, :local]
