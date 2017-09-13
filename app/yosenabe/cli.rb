@@ -8,13 +8,8 @@ module Yosenabe
 
   class CLI < Thor
 
-    desc 'hello ruizu', 'say hello to NAME'
-    option :name,
-           :type => :string,
-           :default => 'saito',
-           :desc => 'あなたのお名前'
-
-    def hello(name)
+    desc 'ruizu [NAME]', 'say hello to NAME'
+    def ruizu(name)
       Yosenabe::Batch::Ruizu.new.hello(name)
     end
 
