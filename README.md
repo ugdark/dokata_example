@@ -3,7 +3,20 @@
 dokataは個人のrepositoryでいつ消されるかわからないのものと想定した方がよい  
 
 
-## checkuout 構築例
+## プロダクト 構築例 
+このようなフォルダ構成にしてるのは  
+でかいProjectでもないしProjectの切り替えがめんどいからまとめた  
+使ってるIDEはIDEAです。
+
+### 簡単 (not submodule) それかsubmoduleで
+とりあえず簡単だから。  
+submodule + git remote 個別追加でもいいかと思ってる。試してない。  
+- メリット
+  - 簡単
+  - 更新も可。
+- デメリット
+  - checkout がめんどい。deployを書いた時等
+  - submoduleならcheckoutは解決可
 
 ```bash
 git clone git@github.com:ugdark/dokata_examples.git
@@ -12,20 +25,27 @@ git clone git@github.com:ugdark/examples_ruby.git examples
 git clone git@github.com:ugdark/dokata.git
 ```
 
-業務側ではdokata_examplesが置き換わる。  
-examples,dokata は会社のbacketにも同様にコミットしているので  
-リモートを追加して両方にコミットしてる。  
+### github subtree設定
+これを会社では採用。  
+リポジトリを３つ持ち会社でもOSSを取り込みOSSにも貢献がしやすい。  
+後は個人リポジトリのみのものでメンテが廃れても内部に取り込まれてるので大丈夫  
 
+#### リポジトリ追加
 ```bash
-cd modules/examples
-git remote add office #{office_repository}
-cd modules/dokata
-git remote add office #{office_repository}
+git remote add github-dokata git@github.com:ugdark/dokata.git
+git remote add github-examples git@github.com:ugdark/examples_ruby.git
+```
+#### 追加 (一回のみ)
+```bash
+git subtree add --prefix=modules/dokata github-dokata master # 外部のリポジトリから追加してれば不要
+git subtree add --prefix=modules/examples github-examples master # 外部のリポジトリから追加してれば不要
 ```
 
-このようなフォルダ構成にしてるのは  
-でかいProjectでもないしProjectの切り替えがめんどいからまとめた  
-使ってるIDEはIDEAです。
+#### OSS側の取得更新(pushも可)
+```bash
+git subtree pull --prefix=modules/examples github-examples master
+git subtree pull --prefix=modules/dokata github-dokata master
+```
 
 ## appフォルダについて
 業務で使う処理はアプリケーションという感じにしてインスタンス持ったり  
@@ -35,5 +55,10 @@ DDDでいうとドメイン層を意識してます。
 
 ## exe example
 ```bash
-./exe/yosenabe.rb yamada
+./exe/yosenabe ruizu yamada
+```
+
+## 初期設定
+```bash
+./bin/setup
 ```
