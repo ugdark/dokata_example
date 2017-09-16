@@ -1,20 +1,26 @@
 # frozen_string_literal: true
 
-require 'dokata'
+require_relative 'mixin_config'
+
+require 'active_support'
+require 'active_support/core_ext'
 
 module Yosenabe
   module Mixin
 
     module MixinLogger
-      def self.included(base)
-        base.define_singleton_method :define_greeter do |method_name, output|
-          define_method(method_name) { output }
-        end
-      end
+      include Yosenabe::Mixin::MixinConfig
 
       def logger
-        Dokata::NotifierLogger.new(config)
+        if @_logger_instance.nil?
+          new_config = {
+              loggers: config[:loggers]
+          }
+          @_logger_instance = Dokata::NotifierLogger.new(new_config).freeze
+        end
+        @_logger_instance
       end
+
     end
 
     module DummyLogger
