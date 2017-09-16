@@ -2,6 +2,8 @@
 
 require 'config'
 
+require 'ice_nine'
+
 # Application基底クラス
 # Configを持つ
 module Yosenabe
@@ -15,6 +17,7 @@ module Yosenabe
       # TODO: requireで configを別名にできないのかな。
       @config = Object::Config.load_files(Object::Config.setting_files(config_path, @env))
       remake_config_path!(@config)
+      IceNine.deep_freeze(@config)
     end
 
     attr_reader :root_dir, :env, :config
@@ -30,9 +33,9 @@ module Yosenabe
         if value.class.name == 'Config::Options'
           remake_config_path!(value)
         elsif value.instance_of?(String)
-          options[key] = options[key].gsub('#{root_dir}', @root_dir)
+          options[key].gsub!('#{root_dir}', @root_dir)
         else
-          options[key] = options[key]
+          options[key]
         end
       end
     end
