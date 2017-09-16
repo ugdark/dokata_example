@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 require_relative 'mixin_config'
+require 'dokata/notifier_logger'
 
 require 'active_support'
 require 'active_support/core_ext'

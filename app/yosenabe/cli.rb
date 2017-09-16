@@ -8,9 +8,19 @@ module Yosenabe
 
   class CLI < Thor
 
-    desc 'ruizu [NAME]', 'say hello to NAME'
-    def ruizu(name)
-      Yosenabe::Batch::Ruizu.new.hello(name)
+    desc 'ruizu [command]', 'exec. [command] 出勤, 退勤'
+
+    def ruizu(command)
+      case command
+
+        when '出勤'
+          Yosenabe::Batch::Ruizu.new.entry
+        when '退勤'
+          Yosenabe::Batch::Ruizu.new.leave
+        else
+          Yosenabe::Batch::Ruizu.new.hello('hello')
+      end
+
     end
 
   end
