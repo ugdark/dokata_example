@@ -62,3 +62,19 @@ DDDでいうとドメイン層を意識してます。
 ```bash
 ./bin/setup
 ```
+
+
+## rubocop
+
+### 現在の違反をチェック
+途中からの導入だったので違反が多すぎるのでまずは  
+今の違反一覧を作成
+```bash
+bundle exe rubocop --auto-gen-config
+```
+
+### 自動適応(※一部)
+option -a(--auto-correct) を使用
+```bash
+bundle exe rubocop -a
+```
