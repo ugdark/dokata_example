@@ -2,7 +2,6 @@
 module Yosenabe
   module Mixin
     module Site
-
       # retry処理
       def retry3
         3.times do
@@ -15,8 +14,8 @@ module Yosenabe
 
       def get_driver
         caps = Selenium::WebDriver::Remote::Capabilities.chrome('chromeOptions' => {
-            args: %w(--headless --disable-gpu window-size=1280x800),
-        })
+                                                                  args: %w[--headless --disable-gpu window-size=1280x800]
+                                                                })
 
         driver = Selenium::WebDriver.for :chrome, desired_capabilities: caps
         driver.manage.timeouts.implicit_wait = 30
@@ -26,14 +25,11 @@ module Yosenabe
       end
 
       def browsing
-        begin
-          driver = get_driver
-          yield driver
-        ensure
-          driver.try(:quit)
-        end
+        driver = get_driver
+        yield driver
+      ensure
+        driver.try(:quit)
       end
-
     end
 
     # 認証があるサイト
@@ -41,13 +37,13 @@ module Yosenabe
       include Site
 
       # login実装
-      def login(driver)
-        raise NotImplementedError.new("You must implement #{self.class}##{__method__}")
+      def login(_driver)
+        raise NotImplementedError, "You must implement #{self.class}##{__method__}"
       end
 
       # logout実装
-      def logout(driver)
-        raise NotImplementedError.new("You must implement #{self.class}##{__method__}")
+      def logout(_driver)
+        raise NotImplementedError, "You must implement #{self.class}##{__method__}"
       end
 
       # noinspection RubySuperCallWithoutSuperclassInspection
@@ -59,9 +55,5 @@ module Yosenabe
         end
       end
     end
-
   end
-
 end
-
-

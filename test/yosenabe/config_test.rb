@@ -39,17 +39,25 @@ class TestConfigModule < Test::Unit::TestCase
     end
 
     test 'root_configを確認' do
-      is_root_dir = Yosenabe.config[:loggers][:basic][:logdev].include?('root_dir')
+      is_root_dir = Yosenabe::config[:loggers][:basic][:logdev].include?('root_dir')
       assert_equal is_root_dir, false
     end
 
     test 'config変更するとエラー' do
       assert_raises(RuntimeError) do
-        Yosenabe.config[:loggers][:basic] = 'test'
+        Yosenabe::config[:loggers][:basic][:logdev] = 'test'
       end
     end
 
+    test 'config integer' do
+      max_history = Yosenabe::config[:loggers][:basic][:max_history]
+      assert_equal max_history, 7
+    end
+
+    test 'config string' do
+      shift_age = Yosenabe::config[:loggers][:basic][:shift_age]
+      assert_equal shift_age, 'daily'
+    end
 
   end
-
 end

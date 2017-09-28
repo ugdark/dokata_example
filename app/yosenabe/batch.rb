@@ -2,11 +2,8 @@
 
 require 'yosenabe/batch/ruizu'
 
-# Application基底クラス
-# Configを持つ
 module Yosenabe
-
+  # 個々のBatch処理をまとめる。
   module Batch
-
   end
 end

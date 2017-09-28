@@ -1,0 +1,37 @@
+AllCops:
+  # 除外するディレクトリ（自動生成されたファイル）
+  # デフォルト設定にある"vendor/**/*"が無効化されないように記述
+  Exclude:
+    - bin/*
+    - logs/**/*
+    - modules/**/*
+    - test/**/*
+    - 'vendor/**/*'
+
+# 日本語のドキュメントを許可する。
+Style/AsciiComments:
+  StyleGuide: 'https://github.com/bbatsov/ruby-style-guide#english-comments'
+  Enabled: false
+
+
+# exeではすべてのerrorをcatchする為
+Lint/RescueException:
+  Exclude:
+    - 'exe/yosenabe'
+
+# configの置換処理の為に使用
+Lint/InterpolationCheck:
+  Exclude:
+    - 'app/yosenabe/config.rb'
+
+# batchは制御やloggerが増えるのでここは少し緩くする
+Metrics/MethodLength:
+  Max: 30
+  Include:
+    - 'app/yosenabe/batch/*'
+
+# batch以外は通常
+Metrics/MethodLength:
+  Max: 10
+  Exclude:
+    - 'app/yosenabe/batch/*'

@@ -63,8 +63,39 @@ DDDでいうとドメイン層を意識してます。
 ./bin/setup
 ```
 
+## テスト
+```bash
+bundle exec rake test
+```
+## yard 使い方
 
+### docを作る
+```bash
+bundle exec yard 
+```
+
+### docを見る
+```bash
+bundle exec yard server
+```
+
+## bundle 使い方
+
+### install
+初回のみ
+```bash
+bundle install --path vendor/bundle
+```
+
+### update
+Gemfileに記述されたgemを一括でバージョンアップデートする。  
+※ たまに誰か更新する。  
+
+```bash
+bundle update
+```
 ## rubocop
+コードチェックと整形も一部
 
 ### 現在の違反をチェック
 途中からの導入だったので違反が多すぎるのでまずは  
