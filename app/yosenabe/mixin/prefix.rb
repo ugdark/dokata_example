@@ -1,7 +1,5 @@
 # frozen_string_literal: true
 
-require 'yosenabe/config'
-
 module Yosenabe
   module Mixin
     # アプリのsub nameを扱う

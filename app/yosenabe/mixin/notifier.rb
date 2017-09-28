@@ -27,7 +27,7 @@ module Yosenabe
         def get_loggers(config_loggers, prefix)
           config_loggers.map  do |key, value|
             new_value = value.dup
-            new_value[:logdev] = value[:logdev].gsub('.media.', ".#{prefix}.")
+            new_value[:logdev] = value[:logdev].gsub('.sub.', ".#{prefix}.")
             [key, new_value]
           end.to_h
         end
